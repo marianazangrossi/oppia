@@ -55,12 +55,26 @@ interface Context {
 }
 
 declare const require: RequireContext;
+declare let heapSize: number;
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
+jasmine.getEnv().addReporter({
+  suiteDone: function(result) {
+    // eslint-disable-next-line no-console
+    console.log('Suite: ' + result.description + ' was ' + result.status);
+  },
+  specDone: function(result) {
+    // eslint-disable-next-line no-console
+    console.log('Spec: ' + result.description + ' was ' + result.status);
+    // eslint-disable-next-line no-console
+    console.log(context.keys().length);
+  }
+});
+
 
 // Then we find all the tests, as well as any controller, directive,
 // service/factory files.
