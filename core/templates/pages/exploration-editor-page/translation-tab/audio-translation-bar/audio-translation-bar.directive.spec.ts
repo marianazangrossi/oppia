@@ -57,7 +57,7 @@ import $ from 'jquery';
 require('pages/exploration-editor-page/translation-tab/audio-translation-bar/' +
   'audio-translation-bar.directive.ts');
 
-describe('State Graph Visualization directive', function() {
+describe('Audio Translation Bar directive', function() {
   var ctrl = null;
   var $interval = null;
   var $q = null;
@@ -285,10 +285,10 @@ describe('State Graph Visualization directive', function() {
     });
     spyOn(voiceoverRecordingService, 'startRecording').and.returnValue(
       $q.resolve());
-    spyOn(voiceoverRecordingService, 'stopRecord');
-    spyOn(voiceoverRecordingService, 'closeRecorder');
-    spyOn(audioPlayerService, 'stop');
-    spyOn(audioPlayerService, 'clear');
+    spyOn(voiceoverRecordingService, 'stopRecord').and.callFake(() => {});
+    spyOn(voiceoverRecordingService, 'closeRecorder').and.callFake(() => {});
+    spyOn(audioPlayerService, 'stop').and.callFake(() => {});
+    spyOn(audioPlayerService, 'clear').and.callFake(() => {});
 
     $scope.checkAndStartRecording();
     $scope.$apply();
